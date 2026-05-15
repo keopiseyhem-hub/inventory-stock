@@ -59,11 +59,18 @@ $sell_total=0; ?>
                     <?php }?>
                 </td>
                 <td>
-                    <div class="action-container">
-                <a href="edit.php?id=<?php echo $doc['id']?>" class="btn-update"> <i class="fa fa-solid fa-pen-to-square"></i>កែប្រែ </a>
-                <button class="btn-delete" onclick="confirmDelete()"><i class="fa fa-solid fa-trash-can"></i>លុប</button>
+                    <td>
+                        <div class="action-container">
+                            <a href="edit.php?id=<?php echo $doc['id'] ?>" class="btn-update"> <i class="fa fa-solid fa-pen-to-square"></i>កែប្រែ </a>
+                            <form id="deletesumbit" style="display: inline-block;" action="delete.php" method="post">
+                                <input type="hidden" id="proid" name="id" value="<?php echo $doc['id']?>">
+                            </form>
+                            <button class="btn-delete" onclick="confirmdelete(<?php echo $doc['id']?>)">
+                                <i class="fa fa-solid fa-trash-can"></i>លុប
+                            </button>
 
-                    </div>
+                        </div>
+                    </td>
             </td>
             </tr>
             <?php } ?>
@@ -72,6 +79,39 @@ $sell_total=0; ?>
 </div>
 
 <?php require_once(__DIR__."/layout/footer.php")?>
+<script>
+    function confirmdelete(id) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url:"delete.php",
+                type:"post",
+                data:{id:id},
+                success:function(response){
+                    $("#row_"+id).remove();
+                    Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+            });
+                },
+            error:function(error){
+                console.log(error);
+            }
+            })
+}
+        });
+
+    }
+</script>
 
 
 
