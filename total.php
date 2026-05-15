@@ -58,7 +58,7 @@ $sell_total=0; ?>
                         <p style="color: #af9e02;">ជិតអស់ស្ទុក</p>
                     <?php }?>
                 </td>
-                <td>
+               
                     <td>
                         <div class="action-container">
                             <a href="edit.php?id=<?php echo $doc['id'] ?>" class="btn-update"> <i class="fa fa-solid fa-pen-to-square"></i>កែប្រែ </a>
@@ -71,7 +71,7 @@ $sell_total=0; ?>
 
                         </div>
                     </td>
-            </td>
+           
             </tr>
             <?php } ?>
         </tbody>
